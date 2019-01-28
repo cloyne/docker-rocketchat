@@ -2,4 +2,4 @@
 # description "Rocketchat service manager"
 sv start nginx
 sv start rocketchat_mongo
-chpst -u rocketchat:rocketchat exec /usr/local/bin/node /app/Rocket.Chat/main.js
+chpst -u rocketchat:rocketchat exec /usr/local/bin/node /Rocket.Chat/bundle/main.js

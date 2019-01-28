@@ -1,6 +1,0 @@
-#!/bin/bash -e
-
-mkdir -p /var/log/rocketchat/mongo
-chown nobody:nogroup /var/log/rocketchat/mongo
-
-exec chpst -u nobody:nogroup svlogd -tt /var/log/rocketchat/mongo
