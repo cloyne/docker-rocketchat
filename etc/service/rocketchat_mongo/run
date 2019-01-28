@@ -1,0 +1,5 @@
+# description "MongoDB service manager for rocketchat"
+
+# Path to our app
+chdir /var/www/rocket.chat
+exec chpst -u rocketchat:rocketchat /usr/local/bin/docker-compose up db 2>&1
