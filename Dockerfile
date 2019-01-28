@@ -36,14 +36,14 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF505
  mkdir -p /Rocket.Chat && \
  tar -zxf rocket.chat.tgz -C /Rocket.Chat && \
  rm rocket.chat.tgz rocket.chat.tgz.asc && \
- npm cache clear --force && \
+ npm cache clear --force
 
 # Configure the Rocket.Chat service
 RUN set -x && \
  groupadd -g 99999 -r rocketchat && \
- useradd -u 99999 -r -g rocketchat rocketchat
+ useradd -u 99999 -r -g rocketchat rocketchat && \
  cd /Rocket.Chat/bundle/programs/server && \
- npm install
+ npm install && \
  npm cache clear --force && \
  chown -R rocketchat:rocketchat /Rocket.Chat
 
