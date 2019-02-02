@@ -1,4 +1,3 @@
 #!/bin/bash
 # description "Rocketchat service manager"
-sv start rsyslogd
 chpst -u rocketchat:rocketchat exec /usr/local/bin/node /Rocket.Chat/bundle/main.js
