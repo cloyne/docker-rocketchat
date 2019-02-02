@@ -45,7 +45,9 @@ RUN set -x && \
  cd /Rocket.Chat/bundle/programs/server && \
  npm install && \
  npm cache clear --force && \
+ sed -i 's/log\/nullmailer/log\/rocketchat\/nullmailer/' /etc/service/nullmailer/log/run && \
  chown -R rocketchat:rocketchat /Rocket.Chat
+
 
 USER rocketchat
 
