@@ -6,6 +6,7 @@ ENV RC_VERSION latest
 
 VOLUME /data/mongo
 VOLUME /dump
+VOLUME /etc/rocketchat
 VOLUME /var/log/rocketchat
 
 # RUN apt-get update -q -q && \
