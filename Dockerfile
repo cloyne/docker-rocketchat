@@ -2,7 +2,7 @@ FROM tozd/nginx-cron:ubuntu-xenial
 
 ENV VIRTUAL_HOST chat.cloyne.org
 ENV NODE_VERSION 8.11.4
-ENV RC_VERSION 0.65.2
+ENV RC_VERSION latest
 
 VOLUME /data/mongo
 VOLUME /dump
