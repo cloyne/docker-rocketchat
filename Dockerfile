@@ -22,10 +22,10 @@ COPY ./etc /etc
 
 ## Install necessary dependency packages
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5 && \
+ apt-get update && apt-get install apt-transport-https && \
  echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list && \
- apt-get install apt-transport-https && \
  apt-get update && \
- apt-get install curl build-essential mongodb-org --no-install-recommends -y && \
+ apt-get install openssh-client curl build-essential mongodb-org --no-install-recommends -y && \
  curl -sL curl -sL https://deb.nodesource.com/setup_8.x | sudo bash - && \
  apt-get install -y nodejs graphicsmagick && \
  npm install -g inherits n && \
