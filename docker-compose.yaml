@@ -27,13 +27,13 @@ services:
         - mongo:mongo
 
   mongo:
-    image: clonm/mongodb:3.6
+    image: cloyne/mongodb:3.6
     container_name: mongo
     networks:
       server3:
         ipv4_address: '172.25.0.3'
     volumes:
-      - ./data/runtime/mongo:/data/mongo
+      - ./data/runtime/mongo:/data/db
       - ./data/dump:/dump
     command: mongod --smallfiles
 
