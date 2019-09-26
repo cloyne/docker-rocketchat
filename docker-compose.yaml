@@ -10,6 +10,7 @@ services:
     environment:
       VIRTUAL_HOST: chat.cloyne.org
       MONGO_URL: mongodb://mongo:27017/rocketchat
+      MONGO_OPLOG_URL: mongodb://mongo:27017/local?replSet=rs01
       ROOT_URL: https://chat.cloyne.org
       Accounts_UseDNSDomainCheck: "False"
     volumes:
