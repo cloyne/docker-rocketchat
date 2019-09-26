@@ -14,7 +14,7 @@ services:
       ROOT_URL: https://chat.cloyne.org
       Accounts_UseDNSDomainCheck: "False"
     volumes:
-      - ./var/log/nginx:/var/log/nginx
+      - ./var/log/rocketchat:/var/log/rocketchat
       - ./etc/ssl:/ssl
       - ./etc/nginx/sites:/etc/nginx/sites-volume
       - ./var/log/dnsmasq:/var/log/dnsmasq
