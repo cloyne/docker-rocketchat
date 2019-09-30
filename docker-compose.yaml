@@ -2,24 +2,17 @@ version: '2'
 services:
   rocketchat:
     image: cloyne/rocketchat
-    build: .
+    # build: .
     container_name: rocketchat
     networks:
       server3:
         ipv4_address: '172.25.0.2'
     environment:
-      VIRTUAL_HOST: chat.cloyne.org
       MONGO_URL: mongodb://mongo:27017/rocketchat
       MONGO_OPLOG_URL: mongodb://mongo:27017/local?replSet=rs01
       ROOT_URL: https://chat.cloyne.org
-      Accounts_UseDNSDomainCheck: "False"
     volumes:
-      - ./var/log/rocketchat:/var/log/rocketchat
-      - ./etc/ssl:/ssl
-      - ./etc/nginx/sites:/etc/nginx/sites-volume
-      - ./var/log/dnsmasq:/var/log/dnsmasq
-      - ./var/log/dockergen:/var/log/dockergen
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /srv/log/rocketchat:/var/log/rocketchat
     ports:
       - "80:80"
       - "443:443"
@@ -36,6 +29,7 @@ services:
     volumes:
       - ./data/runtime/mongo:/data/db
       - ./data/dump:/dump
+      - /srv/log/mongod:/var/log/mongod
     command: mongod --smallfiles
 
 networks:
