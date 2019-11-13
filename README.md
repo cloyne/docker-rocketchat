@@ -19,8 +19,10 @@
 4. If you get `502 bad gateway`, check `docker network inspect server3.cloyne.org` and confirm the internal IP address of the `rocketchat` container. Go back into `nginx-proxy` and make sure the upstream in `/etc/nginx/sites-enabled/zzz-virtual.conf` matches, then restart nginx with `sv restart nginx`.
 
 # To start from scratch for development
-First, run the [mongo](github.com/cloyne/docker-mongodb) container. From inside
-the mongo container, run `mongo` to open the mongodb shell, then run
-`rs.initiate()`.
-Then exit the mongo container and start the rocketchat service as in step 3
-above.
+First, run the [mongo](github.com/cloyne/docker-mongodb) container.
+
+Then initiate the replica set within the mongo container:
+```
+docker exec --user root mongo mongo --eval "rs.initiate()"
+```
+Then start the rocketchat service as in step 3 above.
