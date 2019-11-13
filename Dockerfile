@@ -1,6 +1,6 @@
 FROM tozd/nginx-cron:ubuntu-xenial
 
-ENV VIRTUAL_HOST chat.cloyne.org
+ENV HOST chat.cloyne.org
 ENV NODE_VERSION 8.11.4
 ENV RC_VERSION latest
 
@@ -62,7 +62,7 @@ NODE_ENV=production \
 MONGO_URL=mongodb://mongo:27017/rocketchat \
 HOME=/tmp \
 PORT=3000 \
-ROOT_URL=${VIRTUAL_HOST}:3000 \
+ROOT_URL=${HOST}:3000 \
 Accounts_AvatarStorePath=/Rocket.Chat/uploads
 
 EXPOSE 3000
