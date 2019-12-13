@@ -49,12 +49,7 @@ RUN set -x && \
  sed -i 's/log\/nullmailer/log\/rocketchat\/nullmailer/' /etc/service/nullmailer/log/run && \
  chown -R rocketchat:rocketchat /Rocket.Chat
 
-
-USER rocketchat
-
 VOLUME /Rocket.Chat/uploads
-
-WORKDIR /Rocket.Chat/bundle
 
 # needs a mongoinstance - defaults to container linking with alias 'mongo'
 ENV DEPLOLY_METHOD=docker \
