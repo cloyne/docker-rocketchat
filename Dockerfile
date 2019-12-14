@@ -1,8 +1,11 @@
-FROM tozd/nginx-cron:ubuntu-xenial
+FROM tozd/nginx-cron:ubuntu-bionic
 
 ENV HOST chat.cloyne.org
 ENV NODE_VERSION 8.11.4
 ENV RC_VERSION latest
+ENV MAILTO closoft
+ENV ADMINADDR closoft
+ENV REMOTES bsc.coop
 
 VOLUME /data/mongo
 VOLUME /dump
@@ -21,9 +24,11 @@ RUN gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0E163286C2
 COPY ./etc /etc
 
 ## Install necessary dependency packages
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5 && \
- apt-get update && apt-get install apt-transport-https  --yes && \
- echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list && \
+
+RUN apt-get -y update && apt-get install apt-transport-https  --yes && \
+ apt install ca-certificates --yes && \
+ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 && \
+ echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list && \
  apt-get update && \
  apt-get install openssh-client curl build-essential mongodb-org --no-install-recommends -y && \
  curl -sL curl -sL https://deb.nodesource.com/setup_8.x | sudo bash - && \
@@ -49,15 +54,16 @@ RUN set -x && \
  sed -i 's/log\/nullmailer/log\/rocketchat\/nullmailer/' /etc/service/nullmailer/log/run && \
  chown -R rocketchat:rocketchat /Rocket.Chat
 
+
 VOLUME /Rocket.Chat/uploads
 
 # needs a mongoinstance - defaults to container linking with alias 'mongo'
 ENV DEPLOLY_METHOD=docker \
-NODE_ENV=production \
-MONGO_URL=mongodb://mongo:27017/rocketchat \
-HOME=/tmp \
-PORT=3000 \
-ROOT_URL=${HOST}:3000 \
-Accounts_AvatarStorePath=/Rocket.Chat/uploads
+    NODE_ENV=production \
+    MONGO_URL=mongodb://mongo:27017/rocketchat \
+    HOME=/tmp \
+    PORT=3000 \
+    ROOT_URL=${HOST}:3000 \
+    Accounts_AvatarStorePath=/Rocket.Chat/uploads 
 
 EXPOSE 3000
