@@ -1,7 +1,7 @@
 FROM tozd/nginx-cron:ubuntu-bionic
 
 ENV HOST chat.cloyne.org
-ENV NODE_VERSION 8.11.4
+ENV NODE_VERSION 8.17.0
 ENV RC_VERSION latest
 ENV MAILTO closoft
 ENV ADMINADDR closoft
@@ -64,6 +64,6 @@ ENV DEPLOLY_METHOD=docker \
     HOME=/tmp \
     PORT=3000 \
     ROOT_URL=${HOST}:3000 \
-    Accounts_AvatarStorePath=/Rocket.Chat/uploads 
+    Accounts_AvatarStorePath=/Rocket.Chat/uploads
 
 EXPOSE 3000
