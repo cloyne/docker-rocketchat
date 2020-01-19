@@ -4,7 +4,7 @@ ENV HOST chat.cloyne.org
 ENV NODE_VERSION 8.17.0
 ENV RC_VERSION latest
 ENV MAILTO closoft
-ENV ADMINADDR closoft
+ENV ADMINADDR clonm
 ENV REMOTES bsc.coop
 
 VOLUME /data/mongo
