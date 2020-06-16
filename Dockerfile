@@ -1,7 +1,7 @@
 FROM tozd/nginx-cron:ubuntu-bionic
 
 ENV HOST chat.cloyne.org
-ENV NODE_VERSION 8.17.0
+ENV NODE_VERSION 12.16.1
 ENV RC_VERSION latest
 ENV MAILTO closoft
 ENV ADMINADDR clonm
@@ -31,7 +31,7 @@ RUN apt-get -y update && apt-get install apt-transport-https  --yes && \
  echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list && \
  apt-get update && \
  apt-get install openssh-client curl build-essential mongodb-org --no-install-recommends -y && \
- curl -sL curl -sL https://deb.nodesource.com/setup_8.x | sudo bash - && \
+ curl -sL curl -sL https://deb.nodesource.com/setup_12.x | sudo bash - && \
  apt-get install -y nodejs graphicsmagick && \
  npm install -g inherits n && \
  n $NODE_VERSION && \
