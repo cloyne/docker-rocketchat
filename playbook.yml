@@ -1,0 +1,69 @@
+#################################################
+# DO Community Playbooks: Docker
+#################################################
+---
+- hosts: all
+  become: yes
+  gather_facts: true
+  vars_files:
+      - ../vars/default.yml
+
+  tasks:
+      - name: Install aptitude using apt
+        apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+      - name: Install required system packages
+        apt: name={{ item }} state=latest update_cache=yes
+        loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools', 'git', 'wget']
+
+      - name: Add Docker GPG apt Key
+        apt_key:
+            url: https://download.docker.com/linux/debian/gpg
+            state: present
+
+      - name: Add Docker deb file
+        apt_repository:
+            repo: deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+            state: present
+
+      - name: Update apt and install docker-ce
+        apt: update_cache=yes name=docker-ce state=latest
+
+      - name: Install Docker Module for Python
+        pip:
+            name: docker
+
+      - name: Install docker-compose
+        pip:
+            name: docker-compose
+
+      - name: Copy our docker-compose.yaml to remote server
+        git:
+            repo: https://github.com/cloyne/docker-rocketchat.git
+            dest: /home/cloyne/rocketchat
+
+      - name: Tear down existing services
+        community.docker.docker_compose:
+            project_src: /home/cloyne/rocketchat
+            state: absent
+
+      - name: Run 'docker system prune'
+        community.docker.docker_prune:
+            containers: yes
+            images: yes
+            networks: yes
+            volumes: yes
+            builder_cache: yes
+
+      - name: Create and start services
+        community.docker.docker_compose:
+            project_src: /home/cloyne/rocketchat
+
+      - ansible.builtin.debug:
+          var: output
+
+      - name: Run `docker-compose up` again
+        community.docker.docker_compose:
+            project_src: /home/cloyne/rocketchat
+            build: no
+
