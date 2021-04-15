@@ -1,5 +1,5 @@
 #################################################
-# DO Community Playbooks: Docker
+# Ansible Playbook for docker-rocketchat
 #################################################
 ---
 - hosts: all
