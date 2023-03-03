@@ -1,7 +1,7 @@
 FROM tozd/nginx-cron:ubuntu-bionic
 
 ENV HOST chat.cloyne.org
-ENV NODE_VERSION 12.22.1
+ENV NODE_VERSION 14.19.3
 ENV RC_VERSION latest
 ENV MAILTO closoft
 ENV ADMINADDR clonm
